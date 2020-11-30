@@ -9,7 +9,7 @@ import pytest
 
 @pytest.mark.usefixtures('oneTimeSetUp', 'setUp')
 @ddt
-class SearchProductsTests(unittest.TestCase):
+class AddTwoItemsTests(unittest.TestCase):
 
     @pytest.fixture(autouse=True)
     def classSetup(self):
@@ -22,6 +22,5 @@ class SearchProductsTests(unittest.TestCase):
     #@unpack
     def test_search_products(self):
         self.dh.search_products()
-        chair_title = self.dorc.verify_text_orange_recliner_chair('Orange Recliner with Leg Rest')
-        self.ts.mark('Chair title', chair_title)
-        self.dorc.buy_chair(450)
+        result = self.dh.products_cat()
+        self.ts.markFinal('SearchProductsTest', result)
