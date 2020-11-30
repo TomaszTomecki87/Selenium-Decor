@@ -19,6 +19,7 @@ class DecorHome(SeleniumDriver):
     _main_page_logo = 'custom-logo' #class
     _close_quick_view = 'ast-quick-view-close' #id
     _shopping_cart_button = 'ast-cart-menu-wrap' #class
+    _add_to_cart_button = 'add-to-cart'  # name
 
 
     def click_search_button(self):
@@ -40,8 +41,24 @@ class DecorHome(SeleniumDriver):
     def click_wooden_rocking_chair_quick_view(self):
         self.elementClick(self._wooden_rocking_chair_quick_view, 'xpath')
 
+    def add_to_cart(self):
+        self.elementClick(self._add_to_cart_button, 'name')
 
-    def search_products(self):
+    def close_quick_view(self):
+        self.elementClick(self._close_quick_view, 'id')
+
+    def shopping_cart(self):
+        self.elementClick(self._shopping_cart_button, 'class')
+
+
+    def search_orange_recliner_chair(self):
         self.scroll_down()
         self.click_orange_recliner_chair()
 
+    def search_wooden_chair(self):
+        self.scroll_down()
+        self.click_wooden_rocking_chair_quick_view()
+        self.add_to_cart()
+        self.close_quick_view()
+        self.scroll_up()
+        self.shopping_cart()

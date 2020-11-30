@@ -16,15 +16,23 @@ class DecorOrangeReclinerChair(SeleniumDriver):
     _add_to_cart_button = 'add-to-cart'  # name
     _view_cart_button = '//a[@title="View cart"]'
     _main_page_logo = 'custom-logo'  # class
-    #_text = '//h1[contains(text(), "Orange Recliner with Leg Rest")]'
-    _title = 'product_title entry-title' #class
+    _text = '//h1[contains(text(), "Orange Recliner with Leg Rest")]'
+    #_title = 'product_title entry-title' #class
 
     def verify_text_orange_recliner_chair(self, item_name):
-        text = self.getText(self._title, 'class')
-        assert text == item_name
+        text = self.getText(locator=self._text, locatorType='xpath')
+        text = text.lower()
+        item_name = item_name.lower()
+        if text == item_name:
+            return True
+        else:
+            return False
+
 
     def verify_price(self):
-        price = int(self.getText(self._orange_recliner_price, 'xpath'))
+        price = self.getText(self._orange_recliner_price, 'xpath')
+        price = price[1:]
+        price = int(float(price))
         return price
 
     def add_to_cart(self):
@@ -48,6 +56,6 @@ class DecorOrangeReclinerChair(SeleniumDriver):
         else:
             self.return_to_main_page()
 
-    def buy_chair(self, price):
+    def buy_orange_recliner_chair(self, price):
         self.buy_on_price(price)
         self.return_to_main_page()

@@ -21,6 +21,6 @@ class AddTwoItemsTests(unittest.TestCase):
     #@data(*getCSVData('C:\\Users\\TT\\PycharmProjects\\Selenium-Skyscanner\\search_tickets_test_data.csv'))
     #@unpack
     def test_search_products(self):
-        self.dh.search_products()
+        self.dh.search_orange_recliner_chair()
         result = self.dh.products_cat()
         self.ts.markFinal('SearchProductsTest', result)

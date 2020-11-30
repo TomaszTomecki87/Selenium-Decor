@@ -21,7 +21,10 @@ class SearchProductsTests(unittest.TestCase):
     #@data(*getCSVData('C:\\Users\\TT\\PycharmProjects\\Selenium-Skyscanner\\search_tickets_test_data.csv'))
     #@unpack
     def test_search_products(self):
-        self.dh.search_products()
+        self.dh.search_orange_recliner_chair()
         chair_title = self.dorc.verify_text_orange_recliner_chair('Orange Recliner with Leg Rest')
-        self.ts.mark('Chair title', chair_title)
-        self.dorc.buy_chair(450)
+        self.ts.mark(chair_title, 'Chair title')
+        self.dorc.buy_orange_recliner_chair(450)
+        self.dh.search_wooden_chair()
+        total_price = self.dc.verify_prices()
+        self.ts.markFinal('test_search_products', total_price)
