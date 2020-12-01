@@ -3,6 +3,7 @@ import utilities.custom_logger as cl
 import logging
 import time
 
+
 class DecorHome(SeleniumDriver):
 
     log = cl.customLogger(logging.DEBUG)
