@@ -399,3 +399,12 @@ class SeleniumDriver():
         except:
             self.log.error("Element :: '" + info + "' state could not be found")
         return enabled
+
+    def click_parent_element(self, locator, locatorType="id"):
+        element = self.getElement(locator, locatorType)
+        if element:
+            parent_xpath = locator+'/parent::*'
+            self.log.info(parent_xpath)
+            self.elementClick(parent_xpath, 'xpath')
+        else:
+            self.log.info('No such element')

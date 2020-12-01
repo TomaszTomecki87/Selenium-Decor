@@ -12,7 +12,6 @@ class DecorHome(SeleniumDriver):
         self.driver = driver
 
     #locators
-    #_product_cat_label = '//h2[contains(text(), "Product categories")]'
     _search_button = '//button[@value="Search"]'
     _orange_recliner_chair = '//h2[contains(text(), "Orange Recliner")]'
     _wooden_rocking_chair_quick_view = '//a[@data-product_id="273"]'
@@ -20,14 +19,12 @@ class DecorHome(SeleniumDriver):
     _close_quick_view = 'ast-quick-view-close' #id
     _shopping_cart_button = 'ast-cart-menu-wrap' #class
     _add_to_cart_button = 'add-to-cart'  # name
+    _sale_mark = '//span[@class="onsale circle"]'
+    _sale_mark_full_xpath = '//li[contains(@class, "ast-article-single")]//div[@class="astra-shop-thumbnail-wrap"]//span[@class="onsale circle"]'
 
 
     def click_search_button(self):
         self.elementClick(self._search_button, 'xpath')
-
-    # def products_cat(self):
-    #     result = self.isElementPresent(self._product_cat_label, 'xpath')
-    #     return result
 
     def scroll_down(self):
         self.webScroll('down')
@@ -50,6 +47,9 @@ class DecorHome(SeleniumDriver):
     def shopping_cart(self):
         self.elementClick(self._shopping_cart_button, 'class')
 
+    def sale_parent_element(self):
+        self.click_parent_element(self._sale_mark, 'xpath')
+
 
     def search_orange_recliner_chair(self):
         self.scroll_down()
@@ -62,3 +62,7 @@ class DecorHome(SeleniumDriver):
         self.close_quick_view()
         self.scroll_up()
         self.shopping_cart()
+
+    def search_sale_item(self):
+        self.scroll_down()
+        self.sale_parent_element()
