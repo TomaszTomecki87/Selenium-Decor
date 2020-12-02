@@ -5,6 +5,7 @@ from traceback import print_stack
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import *
+from selenium.webdriver.support.select import Select
 import utilities.custom_logger as cl
 import logging
 import time
@@ -407,4 +408,23 @@ class SeleniumDriver():
             self.log.info(parent_xpath)
             self.elementClick(parent_xpath, 'xpath')
         else:
-            self.log.info('No such element')
+            self.log.info('Element not found')
+
+    def click_from_dropdown(self, locator, locatorType='id', value='', visibleText=''):
+        element = self.getElement(locator, locatorType)
+        sel = Select(element)
+        if element:
+            if value:
+                if value !='':
+                    sel.select_by_value(value)
+                    self.log.info('Element selected by value')
+            if visibleText:
+                if visibleText !='':
+                    sel.select_by_visible_text(visibleText)
+                    self.log.info('Element selected by visibleText')
+            if value and visibleText:
+                if value !='':
+                    sel.select_by_value(value)
+                    self.log.info('Element selected by value, from if with visibleText')
+        else:
+            self.log.info('Element not found')
