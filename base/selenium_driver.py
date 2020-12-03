@@ -405,7 +405,6 @@ class SeleniumDriver():
         element = self.getElement(locator, locatorType)
         if element:
             parent_xpath = locator+'/parent::*'
-            self.log.info(parent_xpath)
             self.elementClick(parent_xpath, 'xpath')
         else:
             self.log.info('Element not found')

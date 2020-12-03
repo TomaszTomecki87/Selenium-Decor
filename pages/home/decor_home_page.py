@@ -21,7 +21,7 @@ class DecorHome(SeleniumDriver):
     _shopping_cart_button = 'ast-cart-menu-wrap' #class
     _add_to_cart_button = 'add-to-cart'  # name
     _sale_mark = '//span[@class="onsale circle"]'
-    _sale_mark_full_xpath = '//li[contains(@class, "ast-article-single")]//div[@class="astra-shop-thumbnail-wrap"]//span[@class="onsale circle"]'
+    #_sale_mark_full_xpath = '//li[contains(@class, "ast-article-single")]//div[@class="astra-shop-thumbnail-wrap"]//span[@class="onsale circle"]'
 
 
     def click_search_button(self):
@@ -50,6 +50,12 @@ class DecorHome(SeleniumDriver):
 
     def sale_parent_element(self):
         self.click_parent_element(self._sale_mark, 'xpath')
+
+    def verify_sale_mark(self):
+        element = self.getElement(self._sale_mark, 'xpath')
+        return element
+        #if element:
+         #   return True
 
 
     def search_orange_recliner_chair(self):

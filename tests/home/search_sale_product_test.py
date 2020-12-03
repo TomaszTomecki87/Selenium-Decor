@@ -23,14 +23,23 @@ class SearchSaleProductTest(unittest.TestCase):
     #@data(*getCSVData('C:\\Users\\TT\\PycharmProjects\\Selenium-Skyscanner\\search_tickets_test_data.csv'))
     #@unpack
     def test_search_sale_product(self):
+        self.dh.log.info('Start TEST Search Sale Product!!!')
+        home_page_sale_mark = self.dh.verify_sale_mark()
+        self.ts.mark(home_page_sale_mark, 'Sale mark present on home page')
         self.dh.search_sale_item()
+        item_page_sale_mark = self.ds.verify_sale_mark()
+        self.ts.mark(item_page_sale_mark, 'Sale mark present on item page')
         self.ds.buy_sale_item()
+        cart_item_name = self.dc.get_cart_item_name()
+        self.ts.mark(cart_item_name, 'Cart item name')
         self.dc.proceed_with_checkout()
+        checkout_item_name = self.dch.get_checkout_item_name()
+        self.ts.mark(checkout_item_name, 'Checkout item name')
         self.dch.place_order('Tomek', 'T', 'PL', 'Poleczki', '01-123', 'Warsaw', '555222111', 'email@email.com')
+        invalid_payment_info = self.dch.verify_invalid_payment_info()
+        self.ts.mark(invalid_payment_info, 'Invalid Payment Info present')
+        #self.ts.markFinal('Test_search_sale_product', )
 
-        # chair_title = self.dorc.verify_text_orange_recliner_chair('Orange Recliner with Leg Rest')
-        # self.ts.mark(chair_title, 'Chair title')
-        # self.dorc.buy_orange_recliner_chair(450)
-        # self.dh.search_wooden_chair()
-        # total_price = self.dc.verify_prices()
+
+
         # self.ts.markFinal('test_search_products', total_price)

@@ -20,12 +20,12 @@ class DecorCheckout(SeleniumDriver):
     _postcode = 'billing_postcode' #id
     _phone = 'billing_phone' #id
     _email = 'billing_email' #id
-    _item_name = 'product-name' #class
+    _item_name = '//tbody/tr/td[@class="product-name"]' #xpath
     _place_order = 'place_order' #id
-    _invalid_payment_info = 'woocommerce_error' #class
+    _invalid_payment_info = 'woocommerce-error' #class
 
     def get_checkout_item_name(self):
-        checkout_item_name = self.getText(self._item_name, 'class')
+        checkout_item_name = self.getText(self._item_name, 'xpath')
         return checkout_item_name
 
     def enter_first_name(self, firstName):
@@ -55,23 +55,27 @@ class DecorCheckout(SeleniumDriver):
     def click_place_order(self):
         self.elementClick(self._place_order)
 
+    def wait_for_invalid_payment_info(self):
+        self.elementPresenceCheck(self._invalid_payment_info, 'class')
+
+    def wait_for_place_order_button(self):
+        self.waitForElement(self._place_order)
+
     def verify_invalid_payment_info(self):
         payment_error = self.getText(self._invalid_payment_info, 'class')
         return payment_error
 
 
     def place_order(self, firstName, lastName, country, streetAddress,postcode, town, phone, email):
-        checkout_item_name = self.get_checkout_item_name()
         self.enter_first_name(firstName)
         self.enter_last_name(lastName)
         self.select_country(country)
-        time.sleep(5)
         self.enter_street_address(streetAddress)
         self.enter_postcode(postcode)
         self.enter_town(town)
         self.enter_phone(phone)
         self.enter_email(email)
+        time.sleep(3)
+        self.wait_for_place_order_button()
         self.click_place_order()
-        time.sleep(5)
-
-        return checkout_item_name
+        self.wait_for_invalid_payment_info()

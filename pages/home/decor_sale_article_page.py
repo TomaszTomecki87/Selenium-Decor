@@ -16,6 +16,7 @@ class DecorSale(SeleniumDriver):
     _plus_button = 'plus' #class
     _shopping_cart_button = 'ast-cart-menu-wrap'  # class
     _add_to_cart_button = 'add-to-cart'  # name
+    _sale_mark = '//span[@class="onsale circle"]'
 
     def click_plus_button(self):
         self.elementClick(self._plus_button, 'class')
@@ -25,6 +26,10 @@ class DecorSale(SeleniumDriver):
 
     def shopping_cart(self):
         self.elementClick(self._shopping_cart_button, 'class')
+
+    def verify_sale_mark(self):
+        element = self.getElement(self._sale_mark, 'xpath')
+        return element
 
 
     def buy_sale_item(self):

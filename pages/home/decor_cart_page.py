@@ -12,7 +12,7 @@ class DecorCart(SeleniumDriver):
         self.driver = driver
 
     #locators
-    _item_name = 'product-name' #class
+    _item_name = '//tbody/tr/td[@class="product-name"]' #xpath
     _item_price = '//td[@class="product-price"]//span[@class="woocommerce-Price-amount amount"]'
     _total_price = '//td[@data-title="Total"]//span[@class="woocommerce-Price-amount amount"]'
     _minus_button = 'minus' #class
@@ -69,7 +69,7 @@ class DecorCart(SeleniumDriver):
         self.waitForElement(self._checkout_button, 'class')
 
     def get_cart_item_name(self):
-        cart_item_name = self.getText(self._item_name, 'class')
+        cart_item_name = self.getText(self._item_name, 'xpath')
         return cart_item_name
 
     def verify_prices(self):
@@ -79,7 +79,7 @@ class DecorCart(SeleniumDriver):
             return False
 
     def proceed_with_checkout(self):
-        cart_item_name = self.get_cart_item_name()
+        #cart_item_name = self.get_cart_item_name()
         self.click_minus_button()
         self.click_update_cart()
         self.card_updated_info_check()
@@ -89,4 +89,4 @@ class DecorCart(SeleniumDriver):
         self.wait_for_checkout_button()
         self.click_checkout_button()
 
-        return cart_item_name
+        #return cart_item_name
