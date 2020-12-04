@@ -18,8 +18,6 @@ class SearchProductsTests(unittest.TestCase):
         self.dc = DecorCart(self.driver)
         self.ts = TestStatus(self.driver)
 
-    #@data(*getCSVData('C:\\Users\\TT\\PycharmProjects\\Selenium-Skyscanner\\search_tickets_test_data.csv'))
-    #@unpack
     def test_search_products(self):
         self.dh.search_orange_recliner_chair()
         chair_title = self.dorc.verify_text_orange_recliner_chair('Orange Recliner with Leg Rest')

@@ -20,7 +20,7 @@ def oneTimeSetUp(request, browser):
         driver.maximize_window()
         driver.implicitly_wait(3)
         driver.get(baseURL)
-        #print('Running tests on Chrome')
+        print('Running tests on Chrome')
 
     elif browser == 'firefox':
         #opt = webdriver.FirefoxOptions()
@@ -31,7 +31,7 @@ def oneTimeSetUp(request, browser):
         driver.maximize_window()
         driver.implicitly_wait(3)
         driver.get(baseURL)
-        #print("Running tests on FF")
+        print("Running tests on FF")
 
     if request.cls is not None:
         request.cls.driver = driver

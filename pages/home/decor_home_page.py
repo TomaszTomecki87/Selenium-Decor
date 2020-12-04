@@ -1,7 +1,6 @@
 from base.selenium_driver import SeleniumDriver
 import utilities.custom_logger as cl
 import logging
-import time
 
 
 class DecorHome(SeleniumDriver):
@@ -19,9 +18,10 @@ class DecorHome(SeleniumDriver):
     _main_page_logo = 'custom-logo' #class
     _close_quick_view = 'ast-quick-view-close' #id
     _shopping_cart_button = 'ast-cart-menu-wrap' #class
+    _remove_from_cart_button = 'remove remove_from_cart_button' #class
+    _cart_empty_message = 'woocommerce-mini-cart__empty-message' #class
     _add_to_cart_button = 'add-to-cart'  # name
     _sale_mark = '//span[@class="onsale circle"]'
-    #_sale_mark_full_xpath = '//li[contains(@class, "ast-article-single")]//div[@class="astra-shop-thumbnail-wrap"]//span[@class="onsale circle"]'
 
 
     def click_search_button(self):
@@ -54,8 +54,14 @@ class DecorHome(SeleniumDriver):
     def verify_sale_mark(self):
         element = self.getElement(self._sale_mark, 'xpath')
         return element
-        #if element:
-         #   return True
+
+    def remove_items_from_cart(self):
+        self.elementClick(self._remove_from_cart_button, 'class')
+
+    def get_items_quantity_in_cart(self):
+        text = self.getText(self._shopping_cart_button, 'class')
+        if int(text) > 0:
+            self.remove_items_from_cart()
 
 
     def search_orange_recliner_chair(self):

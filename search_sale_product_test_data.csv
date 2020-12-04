@@ -1,0 +1,3 @@
+fistName,lastName,country(code or name),address,postcode,town,phone,email
+Jan,Kowalski,PL,Poprzeczna,01-123,Warszawa,666999555,JanKowalski@email.com
+John,Smith,NZ,First street,15-845,Auckland,999554125,John.Smith@email.com
