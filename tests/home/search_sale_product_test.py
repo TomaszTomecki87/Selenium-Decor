@@ -34,11 +34,15 @@ class SearchSaleProductTest(unittest.TestCase):
         self.ts.mark(cart_item_name, 'Cart item name')
         self.dc.proceed_with_checkout()
         checkout_item_name = self.dch.get_checkout_item_name()
+        formatted_checkout_item_name = checkout_item_name[:len(cart_item_name)]
+        test_search_sale_product_result = (cart_item_name == formatted_checkout_item_name)
         self.ts.mark(checkout_item_name, 'Checkout item name')
         self.dch.place_order('Tomek', 'T', 'PL', 'Poleczki', '01-123', 'Warsaw', '555222111', 'email@email.com')
         invalid_payment_info = self.dch.verify_invalid_payment_info()
         self.ts.mark(invalid_payment_info, 'Invalid Payment Info present')
-        #self.ts.markFinal('Test_search_sale_product', )
+        self.ts.markFinal('Test_search_sale_product', test_search_sale_product_result)
+
+
 
 
 
