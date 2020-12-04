@@ -19,6 +19,7 @@ class SearchProductsTests(unittest.TestCase):
         self.ts = TestStatus(self.driver)
 
     def test_search_products(self):
+        self.dh.log.info('Start TEST Search Products!!!')
         self.dh.search_orange_recliner_chair()
         chair_title = self.dorc.verify_text_orange_recliner_chair('Orange Recliner with Leg Rest')
         self.ts.mark(chair_title, 'Chair title')
